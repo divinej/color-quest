@@ -39,7 +39,7 @@ const GameLayout = () => {
 
   return (
     <>
-        <Toaster />
+        <Toaster data-testid="gameStatus"/>
         <header className='m-auto font-primary mb-6'>
             <a href="/" className='flex place-content-center'>
                 <img src={Logo} className="logo" alt="Color Quest logo" />

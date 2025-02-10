@@ -80,11 +80,11 @@ const StartGame = () => {
     }
     return (
         <>
-            <h1 className='text-5xl font-bold font-primary mt-3 mb-24'>Game Score: {context.gameScore}</h1>
-            <div className="grid grid-cols-2 md:grid-cols-[160px_160px_160px] gap-4 place-content-center">
+            <h1 className='text-5xl font-bold font-primary mt-3 mb-24' data-testid="score">Game Score: {context.gameScore}</h1>
+            <div className="grid grid-cols-2 md:grid-cols-[160px_160px_160px] gap-4 place-content-center" data-testid="colorOption">
                 {
                    colorOptions.map((color, index) => ( 
-                    color === chosenColor && animation == true ? <ColorBox animate="animate-pulse" disabled={isDisabled} key={index} boxColor={chosenColor} click={handleClick} /> :
+                    color === chosenColor && animation == true ? <ColorBox animate="animate-pulse" disabled={isDisabled} key={index} boxColor={chosenColor} click={handleClick} data-testid="colorBox"/> :
                     <ColorBox key={index} boxColor={color} click={handleClick} disabled={isDisabled}/>
                    ))
                 }

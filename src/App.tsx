@@ -10,7 +10,7 @@ function App() {
       <h1 className='text-5xl font-bold font-primary mb-24 mt-3'>Color Quest</h1>
       <div className="grid grid-cols-1 gap-8 justify-items-center  ">
         <Button asChild>
-          <NavLink to="start_game">Start Game</NavLink>
+          <NavLink to="start_game" data-testid="newGameButton">New Game</NavLink>
         </Button>
         <Button asChild>
           <NavLink to="highscore">High Score</NavLink>

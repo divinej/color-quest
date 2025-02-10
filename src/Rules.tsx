@@ -3,7 +3,7 @@ const Rules = () => {
         <>
              <h1 className='text-5xl font-bold font-primary mb-24 mt-3'>Rules</h1>
              <div className="grid grid-cols-1 justify-items-center  ">
-          <ol className="text-base text-left">
+          <ol className="text-base text-left" data-testid="gameInstructions">
               <li className="mb-4"><strong>Objective</strong>: Identify and click the box that matches the color of the highlighted (pulsing) box. The buttons are disabled when a box is pulsing.</li>
               <li className="mb-4"><strong>Gameplay</strong>
                   <ol>
