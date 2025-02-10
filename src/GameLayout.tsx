@@ -33,8 +33,9 @@ function useStickyState(defaultValue:number, name:string) {
 }
 
 const GameLayout = () => {
+  const [highScore, setHighScore] = useStickyState( 0,'HIGHSCORE');
   const [gameScore, setScore] = useStickyState( 0,'GAMESCORE');
-const [highScore, setHighScore] = useStickyState( 0,'HIGHSCORE');
+
 
   return (
     <>
@@ -46,7 +47,7 @@ const [highScore, setHighScore] = useStickyState( 0,'HIGHSCORE');
         </header>
        
           <main className='font-primary'>
-            <Outlet context={[gameScore, setScore, highScore, setHighScore]}/>
+            <Outlet context={{gameScore, setScore, highScore, setHighScore}}/>
           </main>
        
     </>

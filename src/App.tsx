@@ -4,7 +4,7 @@ import { NavLink } from 'react-router';
 import { useOutletContext } from 'react-router';
 
 function App() {
-  const [, setScore] = useOutletContext<[number, React.Dispatch<React.SetStateAction<number>>]>();
+  const context = useOutletContext<any>();
   return (
     <>
       <h1 className='text-5xl font-bold font-primary mb-24 mt-3'>Color Quest</h1>
@@ -15,7 +15,7 @@ function App() {
         <Button asChild>
           <NavLink to="highscore">High Score</NavLink>
         </Button>
-        <Button onClick={() => setScore(0)}> Reset</Button>
+        <Button onClick={() => context.setScore(0)}> Reset</Button>
         <Button asChild>
           <NavLink to="rules">Rules</NavLink>
         </Button>

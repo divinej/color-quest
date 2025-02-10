@@ -15,7 +15,7 @@ const shuffle = (array: string[]) => {
 
 
 const StartGame = () => {
-    const [gameScore, setScore, highScore, setHighScore] = useOutletContext<[number, React.Dispatch<React.SetStateAction<number>>, number, React.Dispatch<React.SetStateAction<number>>]>();
+    const context = useOutletContext<any>();
     
     const [colorOptions, setColor] = useState(colors);
     const [chosenColor, setChosenColor] = useState(colors[randomNumber]);
@@ -50,11 +50,14 @@ const StartGame = () => {
                 title: "You win!",
                 description: "Correct guess",
               });
-                setScore((prev:number) => prev + 5);
+              context.setScore((prev:number) => prev + 5);
 
-                if (gameScore > highScore) {
-                    setHighScore(gameScore);
+                if (context.gameScore > context.highScore) {
+                    context.setHighScore(context.gameScore);
+                    console.log("context.highScore");
                 }
+
+                console.log(context);
               randomNumber = Math.round(Math.random() * (+colors.length - 1));
               setChosenColor(colors[randomNumber]);
         } else {
@@ -63,7 +66,13 @@ const StartGame = () => {
                 title: "You Loose!",
                 description: "Wrong guess",
               });
-              setScore((prev:number) => prev - 5);
+              context.setScore((prev:number) => prev - 5);
+              if (context.gameScore > context.highScore) {
+                context.setHighScore(context.gameScore);
+                console.log(context.highScore);
+            }
+
+            console.log(context);
               randomNumber = Math.round(Math.random() * (+colors.length - 1));
               setChosenColor(colors[randomNumber]);
               
@@ -71,7 +80,7 @@ const StartGame = () => {
     }
     return (
         <>
-            <h1 className='text-5xl font-bold font-primary mt-3 mb-24'>Game Score: {gameScore}</h1>
+            <h1 className='text-5xl font-bold font-primary mt-3 mb-24'>Game Score: {context.gameScore}</h1>
             <div className="grid grid-cols-2 md:grid-cols-[160px_160px_160px] gap-4 place-content-center">
                 {
                    colorOptions.map((color, index) => ( 
