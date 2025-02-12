@@ -27,39 +27,39 @@ const StartGame = () => {
     useEffect(() => {
         randomNumber = Math.round(Math.random() * (+colors.length - 1));
         setChosenColor(colors[randomNumber]);
-        setDisabled(true);
+        setDisabled(() => true);
     }, []);
 
     useEffect(() => {
         const timer = setTimeout(() => {
             const shuffledColors = shuffle(colors);
             setColor(shuffledColors);
-            setDisabled(false);
-            setAnimation(false);
+            setDisabled(() => false);
+            setAnimation(() => false);
         }, 5000);
 
         return () => clearTimeout(timer);
     }, [chosenColor]);
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-        setDisabled(true);
-        setAnimation(true);
+        setDisabled(() => true);
+        setAnimation(() => true);
         if (e.currentTarget.style.backgroundColor === chosenColor) {
             toast({
                 variant: "default",
                 title: "You win!",
                 description: "Correct guess",
               });
-              context.setScore((prev:number) => prev + 5);
+              context.setScore((prev:number) => {
+                const newScore = prev + 5;
 
-                if (context.gameScore > context.highScore) {
-                    context.setHighScore(context.gameScore);
-                    console.log("context.highScore");
-                }
-
-                console.log(context);
+                context.setHighScore((prevHighScore:number) => Math.max(prevHighScore, newScore));
+                return newScore;
+              });
+              
+            console.log(context.highScore);
               randomNumber = Math.round(Math.random() * (+colors.length - 1));
-              setChosenColor(colors[randomNumber]);
+              setChosenColor(() => colors[randomNumber]);
         } else {
             toast({
                 variant: "destructive",
@@ -67,14 +67,9 @@ const StartGame = () => {
                 description: "Wrong guess",
               });
               context.setScore((prev:number) => prev - 5);
-              if (context.gameScore > context.highScore) {
-                context.setHighScore(context.gameScore);
-                console.log(context.highScore);
-            }
-
-            console.log(context);
+            
               randomNumber = Math.round(Math.random() * (+colors.length - 1));
-              setChosenColor(colors[randomNumber]);
+              setChosenColor(() => colors[randomNumber]);
               
         }
     }
